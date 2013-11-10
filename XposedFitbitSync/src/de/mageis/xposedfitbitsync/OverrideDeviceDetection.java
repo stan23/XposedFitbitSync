@@ -12,14 +12,7 @@ public class OverrideDeviceDetection implements IXposedHookLoadPackage {
     if (lpparam.packageName.equals("com.fitbit.FitbitMobile")) {
       //XposedBridge.log("we are in FitbitMobile!");
 
-      findAndHookMethod("com.fitbit.bluetooth.a", lpparam.classLoader, "e", new XC_MethodReplacement() {
-        @Override
-        protected Object replaceHookedMethod(XC_MethodHook.MethodHookParam paramAnonymousMethodHookParam) throws Throwable {
-          // this will be called instead of the 'e' method
-          XposedBridge.log("called FitBit BT check - return TRUE!");
-          return true;  
-        }
-      });
+      findAndHookMethod("com.fitbit.bluetooth.a", lpparam.classLoader, "e", XC_MethodReplacement.returnConstant(true));
     }
   }
 }
